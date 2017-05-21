@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Отзывы{% endblock %}
+{% block title %}Задачи{% endblock %}
 {% block head %}
     {{ parent() }}
 {% endblock %}
@@ -11,12 +11,7 @@
                 <input type="email" class="form-control" name="exampleInputEmail" placeholder="Enter email">
             </div>
             <div class="form-group">
-                <label for="exampleInputName">Name</label>
-                <input type="name" class="form-control" name="exampleInputName" placeholder="Enter name">
-            </div>
-
-            <div class="form-group">
-                <label for="text">Text</label>
+                <label for="text">Текст задачи</label>
                 <textarea name="text" class="form-control" rows="3"></textarea>
             </div>
 
@@ -57,10 +52,9 @@
             $('.js-preview').click(function() {
                 var now = new Date();
                 $('#preview .panel-heading').html(function() {
-                    var username = $('[name=exampleInputName]').val();
                     var email = $('[name=exampleInputEmail]').val();
                     var date = now.toString();
-                    return username + ' ' + email + ' ' + date;
+                    return email + ' ' + date;
                 });
                 $('#preview .panel-body').html($('[name=text]').val());
                 $('#preview').show();
@@ -84,26 +78,13 @@
                                 message: 'The email address is not a valid'
                             }
                         }
-                    },
-                    exampleInputName: {
-                        message: 'The username is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The username is required and cannot be empty'
-                            },
-                            stringLength: {
-                                min: 3,
-                                max: 50,
-                                message: 'The username must be more than 6 and less than 50 characters long'
-                            }
-                        }
-                    },
+                    }
                     text: {
                         validators: {
                             stringLength: {
                                 min: 10,
                                 max: 3000,
-                                message: 'Please enter at least 10 characters and no more than 200'
+                                message: 'Please enter at least 10 characters and no more than 3000'
                             },
                             notEmpty: {
                                 message: 'Please supply a description of your project'

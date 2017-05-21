@@ -1,20 +1,21 @@
 <?php
+
 namespace App\Controller;
 
 use App\Core\Controller;
+use App\Model\Todo;
 use App\Service\TodoService;
 //use App\Service\AuthService;
 use App\Model\Comment;
 
-class CommentsController extends Controller
+class TodoController extends Controller
 {
-    /*protected $authService;*/
-    protected $commentsService;
+    protected $todoService;
 
     function __construct()
     {
         parent::__construct();
-        $this->commentsService = new TodoService();
+        $this->todoService = new TodoService();
         /*$this->authService = new AuthService();*/
     }
 
@@ -25,63 +26,63 @@ class CommentsController extends Controller
         $body = $_POST['text'];
 
 
-        $comments = new Comment();
+        $todo = new Todo();
 
-        $comments->email = $email;
-        $comments->username = $username;
-        $comments->body = $body;
+        $todo->email = $email;
+        $todo->username = $username;
+        $todo->body = $body;
 
-        $this->commentsService->add($comments);
-        /*$this->view->render('comments.html.twig');*/
+        $this->todoService->add($todo);
+        /*$this->view->render('todo.html.twig');*/
         header("Location:/");
     }
 
     public function index()
     {
-        $comments = $this->commentsService->getAll();
-        $data = array('comments' => $comments);
-        $this->view->render('comments.html.twig', $data);
+        $todos = $this->todoService->getAll();
+        $data = array('todos' => $todos);
+        $this->view->render('todos.html.twig', $data);
     }
 
     public function descname()
     {
-        $comments = $this->commentsService->sortdecsname();
-        $data = array('comments' => $comments);
-        $this->view->render('comments.html.twig', $data);
+        $todo = $this->todoService->sortdecsname();
+        $data = array('todo' => $todo);
+        $this->view->render('todo.html.twig', $data);
     }
 
     public function ascname()
     {
-        $comments = $this->commentsService->sortacsname();
-        $data = array('comments' => $comments);
-        $this->view->render('comments.html.twig', $data);
+        $todo = $this->todoService->sortacsname();
+        $data = array('todo' => $todo);
+        $this->view->render('todo.html.twig', $data);
     }
 
     public function descemail()
     {
-        $comments = $this->commentsService->sortdecsemail();
-        $data = array('comments' => $comments);
-        $this->view->render('comments.html.twig', $data);
+        $todo = $this->todoService->sortdecsemail();
+        $data = array('todo' => $todo);
+        $this->view->render('todo.html.twig', $data);
     }
 
     public function ascemail()
     {
-        $comments = $this->commentsService->sortacsemail();
-        $data = array('comments' => $comments);
-        $this->view->render('comments.html.twig', $data);
+        $todo = $this->todoService->sortacsemail();
+        $data = array('todo' => $todo);
+        $this->view->render('todo.html.twig', $data);
     }
 
     public function descdate()
     {
-        $comments = $this->commentsService->sortdecsdate();
-        $data = array('comments' => $comments);
-        $this->view->render('comments.html.twig', $data);
+        $todo = $this->todoService->sortdecsdate();
+        $data = array('todo' => $todo);
+        $this->view->render('todo.html.twig', $data);
     }
 
     public function ascdate()
     {
-        $comments = $this->commentsService->sortacsdate();
-        $data = array('comments' => $comments);
-        $this->view->render('comments.html.twig', $data);
+        $todo = $this->todoService->sortacsdate();
+        $data = array('todo' => $todo);
+        $this->view->render('todo.html.twig', $data);
     }
 }

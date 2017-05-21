@@ -13,14 +13,6 @@ class Router
             $this->routingController('TodoController', 'index');
         });
 
-        $this->router->map('get', '/descname', function() {
-            $this->routingController('TodoController', 'descname');
-        });
-
-        $this->router->map('get', '/ascname', function() {
-            $this->routingController('TodoController', 'ascname');
-        });
-
         $this->router->map('get', '/descemail', function() {
             $this->routingController('TodoController', 'descemail');
         });

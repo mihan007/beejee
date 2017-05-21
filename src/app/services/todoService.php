@@ -17,7 +17,7 @@ class TodoService
     public function getAll()
     {
         $data = null;
-        $sql="SELECT username, body,email, created_at  FROM comments WHERE accepted = 1 ORDER by created_at desc";
+        $sql="SELECT body, email, created_at  FROM todos ORDER by created_at desc";
         $pdo = $this->connect->getDb();
         if(!is_null($pdo)) {
             $data = $pdo->query($sql)->fetchAll(PDO::FETCH_CLASS, "App\\Model\\Comment");
@@ -30,43 +30,17 @@ class TodoService
     public function add($comments)
     {
         $count = 0;
-        $sql = 'INSERT INTO comments (username, email, body) VALUES (:username, :email, :body)';
+        $sql = 'INSERT INTO todos (email, body) VALUES (:email, :body)';
         $pdo = $this->connect->getDb();
         if(!is_null($pdo)) {
             $sth = $pdo->prepare($sql);
-            $count = $sth->execute(array(':username' => $comments->username,':email' => $comments->email, ':body' => $comments->body));
+            $count = $sth->execute(array(':email' => $comments->email, ':body' => $comments->body));
             $pdo = null;
         }
         return $count;
     }
 
-    public function sortdecsname()
-    {
-        $data = null;
-        $sql="SELECT username, body,email, created_at  FROM comments WHERE accepted = 1 ORDER by username desc";
-        $pdo = $this->connect->getDb();
-        if(!is_null($pdo)) {
-            $data = $pdo->query($sql)->fetchAll(PDO::FETCH_CLASS, "App\\Model\\Comment");
-            $pdo = null;
-        }
-
-        return $data;
-    }
-
-    public function sortacsname()
-    {
-        $data = null;
-        $sql="SELECT username, body,email, created_at  FROM comments WHERE accepted = 1 ORDER by username asc";
-        $pdo = $this->connect->getDb();
-        if(!is_null($pdo)) {
-            $data = $pdo->query($sql)->fetchAll(PDO::FETCH_CLASS, "App\\Model\\Comment");
-            $pdo = null;
-        }
-
-        return $data;
-    }
-
-    public function sortdecsemail()
+    public function sortdescemail()
     {
         $data = null;
         $sql="SELECT username, body,email, created_at  FROM comments WHERE accepted = 1 ORDER by email desc";
@@ -79,7 +53,7 @@ class TodoService
         return $data;
     }
 
-    public function sortacsemail()
+    public function sortascemail()
     {
         $data = null;
         $sql="SELECT username, body,email, created_at  FROM comments WHERE accepted = 1 ORDER by email asc";
@@ -92,7 +66,7 @@ class TodoService
         return $data;
     }
 
-    public function sortdecsdate()
+    public function sortdescdate()
     {
         $data = null;
         $sql="SELECT username, body,email, created_at  FROM comments WHERE accepted = 1 ORDER by created_at desc";
@@ -105,7 +79,7 @@ class TodoService
         return $data;
     }
 
-    public function sortacsdate()
+    public function sortascdate()
     {
         $data = null;
         $sql="SELECT username, body,email, created_at  FROM comments WHERE accepted = 1 ORDER by created_at asc";
