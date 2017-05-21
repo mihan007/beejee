@@ -2,7 +2,6 @@
 namespace App\Service;
 
 use App\Config\Connect;
-//use App\Model\CommentsModel;
 use PDO;
 
 class TodoService
@@ -20,21 +19,21 @@ class TodoService
         $sql="SELECT body, email, created_at  FROM todos ORDER by created_at desc";
         $pdo = $this->connect->getDb();
         if(!is_null($pdo)) {
-            $data = $pdo->query($sql)->fetchAll(PDO::FETCH_CLASS, "App\\Model\\Comment");
+            $data = $pdo->query($sql)->fetchAll(PDO::FETCH_CLASS, "App\\Model\\Todo");
             $pdo = null;
         }
 
         return $data;
     }
 
-    public function add($comments)
+    public function add($todo)
     {
         $count = 0;
         $sql = 'INSERT INTO todos (email, body) VALUES (:email, :body)';
         $pdo = $this->connect->getDb();
         if(!is_null($pdo)) {
             $sth = $pdo->prepare($sql);
-            $count = $sth->execute(array(':email' => $comments->email, ':body' => $comments->body));
+            $count = $sth->execute(array(':email' => $todo->email, ':body' => $todo->body));
             $pdo = null;
         }
         return $count;

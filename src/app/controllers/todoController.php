@@ -22,14 +22,9 @@ class TodoController extends Controller
     public function add()
     {
         $email = $_POST['exampleInputEmail'];
-        $username = $_POST['exampleInputName'];
         $body = $_POST['text'];
-
-
         $todo = new Todo();
-
         $todo->email = $email;
-        $todo->username = $username;
         $todo->body = $body;
 
         $this->todoService->add($todo);
@@ -44,44 +39,30 @@ class TodoController extends Controller
         $this->view->render('todos.html.twig', $data);
     }
 
-    public function descname()
-    {
-        $todo = $this->todoService->sortdecsname();
-        $data = array('todo' => $todo);
-        $this->view->render('todo.html.twig', $data);
-    }
-
-    public function ascname()
-    {
-        $todo = $this->todoService->sortacsname();
-        $data = array('todo' => $todo);
-        $this->view->render('todo.html.twig', $data);
-    }
-
     public function descemail()
     {
-        $todo = $this->todoService->sortdecsemail();
+        $todo = $this->todoService->sortdescemail();
         $data = array('todo' => $todo);
         $this->view->render('todo.html.twig', $data);
     }
 
     public function ascemail()
     {
-        $todo = $this->todoService->sortacsemail();
+        $todo = $this->todoService->sortascemail();
         $data = array('todo' => $todo);
         $this->view->render('todo.html.twig', $data);
     }
 
     public function descdate()
     {
-        $todo = $this->todoService->sortdecsdate();
+        $todo = $this->todoService->sortdescdate();
         $data = array('todo' => $todo);
         $this->view->render('todo.html.twig', $data);
     }
 
     public function ascdate()
     {
-        $todo = $this->todoService->sortacsdate();
+        $todo = $this->todoService->sortascdate();
         $data = array('todo' => $todo);
         $this->view->render('todo.html.twig', $data);
     }
